@@ -9,7 +9,6 @@
 
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link href="/dist/output.css" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
     <style>
         html {
             scroll-behavior: smooth;
@@ -31,7 +30,7 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 
-<body class="bg-gray-900 text-white overflow-x-hidden">
+<body class="bg-gray-900 text-white">
 
     <div class="flex flex-row items-center justify-between">
         <a href="index.html"
@@ -56,7 +55,7 @@
             <div class="w-full justify-center flex bg-gray-800 py-4">
                 <div class="flex w-3/4 h-120 bg-gray-100" id="zoomed-image-container">
                     <img src="https://w.forfun.com/fetch/58/58f6e1e56c2b6cdfaed4a8eb36cfd72b.jpeg" id="zoomed-image"
-                        alt="placeholder">
+                        alt="placeholder" class="relative">
                 </div>
             </div>
         </class>
@@ -73,6 +72,32 @@
                 $("#zoomed-image-container").css("transform", "scale(1)");
             });
 
+            var zoomLevel = 1;
+            var maxZoom = 4;
+            var minZoom = 1;
+
+            $('#zoom-container img').click(function () {
+                var src = $(this).attr('src');
+                $('#zoomed-image').attr('src', src);
+            });
+
+            $('#zoomed-image-container').on('wheel', function (e) {
+                e.preventDefault();
+
+                if (e.originalEvent.deltaY < 0) {
+                    zoomLevel -= 0.1;
+                } else {
+                    zoomLevel += 0.1;
+                }
+
+                if (zoomLevel > maxZoom) {
+                    zoomLevel = maxZoom;
+                } else if (zoomLevel < minZoom) {
+                    zoomLevel = minZoom;
+                }
+
+                $('#zoomed-image').css('transform', 'scale(' + zoomLevel + ')');
+            });
         });
     </script>
 </body>
