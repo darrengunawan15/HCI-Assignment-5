@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Human Computer Interaction</title>
+    <link rel="shortcut icon" href="./assets/img/icon.png" type="image/x-icon">
+
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="/dist/output.css" rel="stylesheet">
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background-color: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            border-radius: 4em;
+            background-image: linear-gradient(transparent, aqua);
+        }
+
+        .menu-item:hover .popup {
+            display: block;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+
+<body class="bg-gray-900 text-white overflow-x-hidden">
+    <div class="flex flex-row items-center justify-between">
+        <a href="index.html"
+            class="block h-auto w-auto ml-8 px-4 py-3 text-sm font-medium text-center text-white bg-blue-600 rounded-lg hover:bg-blue-700">
+            <i class='bx bx-home-alt-2' style="font-size: 18px;"></i>
+        </a>
+        <span class="my-8 block text-xl sm:text-4xl font-semibold text-center items-center">Interactive Menu</span>
+        <div class="w-24"></div>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 px-4 mt-4 sm:mt-8">
+        <div class="menu-item relative group p-4 bg-gray-600 text-white shadow-md"
+            style="border-radius: 10px 10px 0px 0px;">
+            <div class="name">Food 1</div>
+            <div class="popup hidden w-full bg-gray-800 p-4 absolute top-full left-0 z-10 shadow-lg text-gray-400"
+                style="border-radius: 0px 0px 10px 10px;">
+                <img src="https://wallpapers.com/images/hd/food-4k-1pf6px6ryqfjtnyr.jpg" alt="Food 1" class="mb-2">
+                <p>the only normal food</p>
+            </div>
+        </div>
+        <div class="menu-item relative group p-4 bg-gray-600 text-white shadow-md"
+            style="border-radius: 10px 10px 0px 0px;">
+            <div class="name">Food 2</div>
+            <div class="popup hidden w-full bg-gray-800 p-4 absolute top-full left-0 z-10 shadow-lg text-gray-400"
+                style="border-radius: 0px 0px 10px 10px;">
+                <img src="https://www.thesun.co.uk/wp-content/uploads/2022/08/MT-BURNT-ROLLS-OP-COMP.jpg?strip=all&quality=100&w=1920&h=1080&crop=1"
+                    alt="Food 1" class="mb-2">
+                <p>chocolate bun</p>
+            </div>
+        </div>
+        <div class="menu-item relative group p-4 bg-gray-600 text-white shadow-md"
+            style="border-radius: 10px 10px 0px 0px;">
+            <div class="name">Food 3</div>
+            <div class="popup hidden w-full bg-gray-800 p-4 absolute top-full left-0 z-10 shadow-lg text-gray-400"
+                style="border-radius: 0px 0px 10px 10px;">
+                <img src="https://scontent.fcgk6-2.fna.fbcdn.net/v/t1.6435-9/118621210_319076155980095_7422922315488589600_n.jpg?stp=dst-jpg_p526x296&_nc_cat=101&ccb=1-7&_nc_sid=bd3046&_nc_ohc=ExDgzKvRRAYAX-iWZ1N&_nc_ht=scontent.fcgk6-2.fna&oh=00_AfD4HeEthEJxkn_67kQkmt5Wn5kdicnJymQIqHHvA-4vMA&oe=657FE267"
+                    alt="Food 1" class="mb-2">
+                <p>ikan goreng neraka jahanam</p>
+            </div>
+        </div>
+
+        <script>
+            $(document).ready(function () {
+                $('.menu-item').hover(
+                    function () {
+                        $(this).find('.popup').removeClass('hidden');
+                    },
+                    function () {
+                        $(this).find('.popup').addClass('hidden');
+                    }
+                );
+            });
+        </script>
+</body>
+
+</html>

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Human Computer Interaction</title>
+    <link rel="shortcut icon" href="./assets/img/icon.png" type="image/x-icon">
+
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="/dist/output.css" rel="stylesheet">
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background-color: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            border-radius: 4em;
+            background-image: linear-gradient(transparent, aqua);
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+
+<body class="bg-gray-900 text-white overflow-x-hidden">
+
+    <div class="flex flex-row items-center justify-between">
+        <a href="index.html"
+            class="block h-auto w-auto ml-8 px-4 py-3 text-sm font-medium text-center text-white bg-blue-600 rounded-lg hover:bg-blue-700">
+            <i class='bx bx-home-alt-2' style="font-size: 18px;"></i>
+        </a>
+        <span class="my-8 block text-xl sm:text-4xl font-semibold text-center items-center">Dynamic Price
+            Calculator</span>
+        <div class="w-24"></div>
+    </div>
+
+    <div class="w-full flex flex-col justify-center items-center mt-16">
+        <div class="w-3/4 flex flex-col sm:flex-row">
+            <div class="flex flex-col">
+                <h3>SUBSCRIPTION PLAN</h3>
+                <div class="relative inline-block text-left mb-4">
+                    <button id="dropdownButton" type="button"
+                        class="inline-flex justify-between items-center w-full px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none focus:ring focus:border-blue-300">
+                        <span class="flex justify-between w-full">
+                            <span class="mr-2">Item 1</span>
+                            <svg class="w-4 h-4 text-black self-right" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </span>
+                    </button>
+
+                    <div class="absolute w-full text-center mt-2 space-y-0 bg-white border border-gray-300 rounded-md shadow-lg"
+                        style="display: none;">
+                        <a href="#" class="block w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                            data-value="Item 1">Item 1</a>
+                        <a href="#" class="block w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                            data-value="Item 2">Item 2</a>
+                        <a href="#" class="block w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                            data-value="Item 3">Item 3</a>
+                    </div>
+                </div>
+                <h3>How many users?</h3>
+                <input type="text" name="users-counter" id="rangeValue"
+                    class="shadow-sm-light bg-gray-700 border border-gray-600 text-white placeholder-gray-400 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+            </div>
+            <div class="flex flex-col w-full pl-0 sm:pl-12 mt-0 sm:mt-16">
+                <label for="default-range" class="block mt-2 text-sm font-medium text-gray-900 dark:text-white">How many
+                    users?</label>
+                <div class="flex w-full justify-between mt-1 mb-2">
+                    <h3>0</h3>
+                    <h3>100</h3>
+                </div>
+                <input id="default-range" type="range" value="0"
+                    class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700">
+            </div>
+        </div>
+    </div>
+
+    <div class="flex w-full justify-center items-center mt-8">
+        <div class="w-3/4 flex flex-row justify-between">
+            <div class="w-2"></div>
+            <div class="w-auto mr-2 flex flex-col items-center">
+                <div class="w-full mt-8 text-right">
+                    <table>
+                        <tr>
+                            <th colspan="2">Pricing Summary</th>
+                        </tr>
+                        <tr>
+                            <td class="text-left">Price</td>
+                            <td id="price">$0.00</td>
+                        </tr>
+                        <tr>
+                            <td class="text-left">Tax</td>
+                            <td id="tax">$0.00</td>
+                        </tr>
+                        <tr style="border-top: 1px solid white;">
+                            <td class="text-left">Total</td>
+                            <td id="total">$0.00</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script>
+        $(document).ready(function () {
+            $("#dropdownButton").html('<span class="flex justify-between w-full"><span class="mr-2">Item 1</span><svg class="w-4 h-4 text-black self-right" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></span>');
+
+            $(".relative").on("click", function (event) {
+                event.stopPropagation();
+                $(".absolute").toggle();
+            });
+
+            $(".absolute a").on("click", function () {
+                $("#dropdownButton").html('<span class="flex justify-between w-full"><span class="mr-2">' + $(this).text() + '</span><svg class="w-4 h-4 text-black self-right" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></span>');
+                $(".absolute").hide();
+            });
+
+            $(document).on("click", function () {
+                $(".absolute").hide();
+            });
+
+            var $rangeInput = $('#default-range');
+            var $textInput = $('#rangeValue');
+
+            $textInput.val($rangeInput.val());
+
+            $rangeInput.on('input', function () {
+                var value = $rangeInput.val();
+                $textInput.val(value);
+            });
+
+            $textInput.on('input', function () {
+                var value = $textInput.val();
+                $rangeInput.val(value);
+            });
+
+            $('#default-range').on('input', function () {
+                var value = $(this).val();
+                var selectedItem = $('#dropdownButton').data('selectedItem');
+                updatePrice(value, selectedItem);
+                console.log(selectedItem);
+            });
+
+            $('[data-value]').on('click', function () {
+                var selectedItem = $(this).data('value');
+                $('#dropdownButton').data('selectedItem', selectedItem);
+                updatePrice($('#rangeValue').val(), selectedItem);
+            });
+
+
+            $('#rangeValue').on('input', function () {
+                var value = $(this).val();
+                var selectedItem = $('#dropdownButton').data('selectedItem');
+
+                if (value < 0) {
+                    value = 0;
+                    $rangeInput.val(0);
+
+                } else if (value > 100) {
+                    value = 100;
+                }
+
+                updatePrice(value, selectedItem);
+            });
+
+
+            // To calculate the price
+            function updatePrice(users, selectedItem) {
+                var basePrice = 0;
+
+                switch (selectedItem) {
+                    case 'Item 1':
+                        basePrice = 3;
+                        break;
+                    case 'Item 2':
+                        basePrice = 5;
+                        break;
+                    case 'Item 3':
+                        basePrice = 7;
+                        break;
+                    default:
+                        basePrice = 3;
+                        break;
+                }
+
+                var taxRate = 0.1;
+
+                var price = (basePrice * users).toFixed(2);
+                var tax = (price * taxRate).toFixed(2);
+                var total = (parseFloat(price) + parseFloat(tax)).toFixed(2);
+
+                // Update UI
+                $('#price').text('$' + price);
+                $('#tax').text('$' + tax);
+                $('#total').text('$' + total);
+                $('#rangeValue').val(users);
+                $('#minUsers').text('0');
+                $('#maxUsers').text(users);
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Human Computer Interaction</title>
+    <link rel="shortcut icon" href="./assets/img/icon.png" type="image/x-icon">
+
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="/dist/output.css" rel="stylesheet">
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background-color: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            border-radius: 4em;
+            background-image: linear-gradient(transparent, aqua);
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+
+<body class="bg-gray-900 text-white overflow-x-hidden">
+
+    <div class="flex flex-row items-center justify-between">
+        <a href="index.html"
+            class="block h-auto w-auto ml-8 px-4 py-3 text-sm font-medium text-center text-white bg-blue-600 rounded-lg hover:bg-blue-700">
+            <i class='bx bx-home-alt-2' style="font-size: 18px;"></i>
+        </a>
+        <span class="my-8 block text-xl sm:text-4xl font-semibold text-center items-center">Image Zoomer</span>
+        <div class="w-24"></div>
+    </div>
+
+    <div class="w-full flex justify-center items-center">
+        <class class="w-3/4 my-8">
+            <div class="flex flex-row gap-4 bg-gray-700 w-auto py-4 px-2 justify-evenly" id="zoom-container">
+                <img src="https://w.forfun.com/fetch/58/58f6e1e56c2b6cdfaed4a8eb36cfd72b.jpeg" width="250px"
+                    id="image-1" alt="image-1">
+                <img src="https://i.redd.it/vzi20k54wdn61.jpg" width="250px" id="image-2" alt="image-2">
+                <img src="https://www.chromethemer.com/download/hd-wallpapers/dragon-ball-3840x2160.jpg" width="250px"
+                    id="image-3" alt="image-3">
+                <img src="https://wallpapers.com/images/featured/japan-4k-qbc6mlnwowjbszld.jpg" width="250px"
+                    id="image-4" alt="image-3">
+            </div>
+            <div class="w-full justify-center flex bg-gray-800 py-4">
+                <div class="flex w-3/4 h-120 bg-gray-100" id="zoomed-image-container">
+                    <img src="https://w.forfun.com/fetch/58/58f6e1e56c2b6cdfaed4a8eb36cfd72b.jpeg" id="zoomed-image"
+                        alt="placeholder">
+                </div>
+            </div>
+        </class>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $("#zoom-container img").on("click", function () {
+                var imageUrl = $(this).attr("src");
+                $("#zoomed-image").attr("src", imageUrl);
+            });
+
+            $("#zoom-container").on("mouseleave", function () {
+                $("#zoomed-image-container").css("transform", "scale(1)");
+            });
+
+        });
+    </script>
+</body>
+
+</html>

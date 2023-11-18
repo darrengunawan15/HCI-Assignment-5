@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Human Computer Interaction</title>
+    <link rel="shortcut icon" href="./assets/img/icon.png" type="image/x-icon">
+
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="/dist/output.css" rel="stylesheet">
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background-color: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            border-radius: 4em;
+            background-image: linear-gradient(transparent, aqua);
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+
+<body class="bg-gray-900 text-white overflow-x-hidden">
+
+    <div class="flex flex-row items-center justify-between">
+        <a href="index.html"
+            class="block h-auto w-auto ml-8 px-4 py-3 text-sm font-medium text-center text-white bg-blue-600 rounded-lg hover:bg-blue-700">
+            <i class='bx bx-home-alt-2' style="font-size: 18px;"></i>
+        </a>
+        <span class="my-8 block text-xl sm:text-4xl font-semibold text-center items-center">Dropdown Surprise</span>
+        <div class="w-24"></div>
+    </div>
+
+    <div class="container mx-auto my-10 w-1/2">
+        <div class="relative inline-block text-left w-full">
+            <button id="dropdown-btn" type="button"
+                class="inline-flex items-center justify-between w-full px-4 py-2 text-sm font-medium text-white bg-gray-700 border border-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:border-blue-300 focus:ring focus:ring-blue-200 active:bg-gray-800 transition duration-300 ease-in-out">
+                Select the last option
+                <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M9 5 5 1 1 5" />
+                </svg>
+            </button>
+
+            <div id="dropdown-menu"
+                class="hidden origin-top-right absolute right-0 mt-2 w-full rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+                <!-- Options container -->
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        $(document).ready(function () {
+            const options = [];
+
+            for (let i = 0; i < 14; i++) {
+                const randomValue = Math.floor(Math.random() * 100);
+                options.push(`Option ${i + 1}: ${randomValue}`);
+            }
+
+            options.push(`Option ${15}: ${100}`);
+
+            let currentIndex = 0;
+
+            function showNextOption() {
+                if (currentIndex < options.length) {
+                    const option = options[currentIndex];
+                    const $dropdownMenu = $("#dropdown-menu");
+
+                    $dropdownMenu.append(`<a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">${option}</a>`);
+                    currentIndex++;
+                    $dropdownMenu.removeClass("hidden");
+                }
+            }
+
+            $("#dropdown-btn").click(function () {
+                const $dropdownMenu = $("#dropdown-menu");
+
+                $dropdownMenu.toggleClass("hidden");
+
+                if (!$dropdownMenu.hasClass("hidden")) {
+                    setInterval(showNextOption, 1000);
+                }
+            });
+
+            $(document).on("click", "#dropdown-menu a", function () {
+                const selectedOption = $(this).text();
+
+                if (selectedOption.includes("Option 15")) {
+                    alert("Thanks for waiting!");
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

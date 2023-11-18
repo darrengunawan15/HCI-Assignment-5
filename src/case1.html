@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Human Computer Interaction</title>
+    <link rel="shortcut icon" href="./assets/img/icon.png" type="image/x-icon">
+
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="/dist/output.css" rel="stylesheet">
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background-color: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            border-radius: 4em;
+            background-image: linear-gradient(transparent, aqua);
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+
+<body class="bg-gray-900 text-white overflow-x-hidden">
+
+    <div class="flex flex-row items-center justify-between">
+        <a href="index.html"
+            class="block h-auto w-auto ml-8 px-4 py-3 text-sm font-medium text-center text-white bg-blue-600 rounded-lg hover:bg-blue-700">
+            <i class='bx bx-home-alt-2' style="font-size: 18px;"></i>
+        </a>
+        <span class="my-8 block text-xl sm:text-4xl font-semibold text-center items-center">Interactive Contact Form</span>
+        <div class="w-24"></div>
+    </div>
+
+    <div class="flex flex-col items-center">
+        <div class="w-full px-4 lg:w-3/4">
+            <form id="contactForm" action="">
+                <h1 class="my-8 font-semibold text-2xl text-center">Contact Us</h1>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="mb-6">
+                        <label for="fname" class="block mb-2 text-sm font-medium text-white">First Name <span
+                                class="text-red-400">*</span></label>
+                        <input type="text" id="fname"
+                            class="shadow-sm-light bg-gray-700 border border-gray-600 text-white placeholder-gray-400 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                            placeholder="First Name" required>
+                    </div>
+                    <div class="mb-6">
+                        <label for="lname" class="block mb-2 text-sm font-medium text-white">Last Name <span
+                                class="text-red-400">*</span></label>
+                        <input type="text" id="lname"
+                            class="shadow-sm-light bg-gray-700 border border-gray-600 text-white placeholder-gray-400 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                            placeholder="Last Name" required>
+                    </div>
+                </div>
+
+
+                <div class="mb-6">
+                    <label for="email" class="block mb-2 text-sm font-medium text-white">Your email <span
+                            class="text-red-400">*</span></label>
+                    <input type="email" id="email"
+                        class="shadow-sm-light bg-gray-700 border border-gray-600 text-white placeholder-gray-400 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                        placeholder="example@gmail.com" required>
+                </div>
+                <div class="mb-6">
+                    <label for="phone" class="block mb-2 text-sm font-medium text-white">Your phone number <span
+                            class="text-red-400">*</span></label>
+                    <input type="text" id="phone"
+                        class="shadow-sm-light bg-gray-700 border border-gray-600 text-white placeholder-gray-400 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                        placeholder="Phone Number" required>
+                </div>
+                <label for="message" class="block mb-2 text-sm font-medium text-white">Message <span
+                    class="text-red-400">*</span></label>
+                <textarea id="message" rows="4"
+                    class="block p-2.5 w-full text-sm text-white bg-gray-700 rounded-lg border border-gray-600 focus:ring-blue-500 focus:border-blue-500 placeholder-gray-400"
+                    placeholder="Tell us what we can help you with"></textarea>
+                <div class="flex items-center my-4">
+                    <input id="checkbox" type="checkbox" value=""
+                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                    <label for="checkbox-1" class="ms-2 text-sm font-medium text-gray-300">I'd like
+                        to receive more information about jQuery, I understand and agree to the
+                        <a href="#" class="text-blue-500 hover:underline">Privacy Policy</a></label>
+                </div>
+                <a href="#" id="submitBtn"
+                    class="block my-8 h-auto w-auto px-4 py-3 text-sm font-medium text-center text-white bg-blue-600 rounded-lg hover:bg-blue-700">
+                    Submit Form
+                </a>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $(".error").remove();
+    
+            // Name validation on input or change
+            $("#fname, #lname").on("input", function () {
+                var name = $(this).val();
+                if ($.trim(name) === "") {
+                    showError($(this), 'This field is required');
+                } else {
+                    hideError($(this));
+                }
+            });
+    
+            // Email validation on input or change
+            $("#email").on("input", function () {
+                var email = $(this).val();
+                var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(email)) {
+                    showError($(this), 'Enter a valid email address');
+                } else {
+                    hideError($(this));
+                }
+            });
+    
+            // Phone number validation on input or change
+            $("#phone").on("input", function () {
+                var phone = $(this).val();
+                var phoneRegex = /^[0-9]+$/;
+                if (!phoneRegex.test(phone) || phone.length < 10 || phone.length > 12 || phone.charAt(1) === '0') {
+                    showError($(this), 'Enter a valid phone number (numeric characters only, starting with 0, length between 10 and 12)');
+                } else {
+                    hideError($(this));
+                }
+            });
+    
+            // Message box validation on input or change
+            $("#message").on("input", function () {
+                var message = $(this).val();
+                if ($.trim(message) === "") {
+                    showError($(this), 'This field is required');
+                } else {
+                    hideError($(this));
+                }
+            });
+    
+            $("#submitBtn").click(function () {
+                $(".error").remove();
+    
+                var isValid = true;
+    
+                // Name validation
+                $("#fname, #lname").each(function () {
+                    var name = $(this).val();
+                    if ($.trim(name) === "") {
+                        showError($(this), 'This field is required');
+                        isValid = false;
+                    }
+                });
+    
+                // Email validation
+                var email = $("#email").val();
+                var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(email)) {
+                    showError($("#email"), 'Enter a valid email address');
+                    isValid = false;
+                }
+    
+                // Phone number validation
+                var phone = $("#phone").val();
+                var phoneRegex = /^[0-9]+$/;
+                if (!phoneRegex.test(phone) || phone.length < 10 || phone.length > 12 || phone.charAt(1) === '0') {
+                    showError($("#phone"), 'Enter a valid phone number (numeric characters only, starting with 0 and length between 10 and 12)');
+                    isValid = false;
+                }
+    
+                // Message box validation (just remove this if the message box's purpose to give suggestion which can be left empty)
+                var message = $("#message").val();
+                if ($.trim(message) === "") {
+                    showError($("#message"), 'This field is required');
+                    isValid = false;
+                }
+    
+                // If all validations pass, submit the form
+                if (isValid) {
+                    $("#contactForm").submit();
+                    alert("Form submitted!!!");
+                    $("#contactForm input, #contactForm textarea").val('');
+                }
+            });
+    
+            function showError(element, message) {
+                hideError(element);
+                element.after('<span class="error text-red-400">' + message + '</span>');
+            }
+    
+            function hideError(element) {
+                element.next(".error").remove();
+            }
+        });
+    </script>
+    
+    
+</body>
+
+</html>

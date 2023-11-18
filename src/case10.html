@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Human Computer Interaction</title>
+    <link rel="shortcut icon" href="./assets/img/icon.png" type="image/x-icon">
+
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="/dist/output.css" rel="stylesheet">
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background-color: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            border-radius: 4em;
+            background-image: linear-gradient(transparent, aqua);
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+</head>
+
+<body class="bg-gray-900 text-white overflow-x-hidden">
+
+    <div class="flex flex-row items-center justify-between">
+        <a href="index.html"
+            class="block h-auto w-auto ml-8 px-4 py-3 text-sm font-medium text-center text-white bg-blue-600 rounded-lg hover:bg-blue-700">
+            <i class='bx bx-home-alt-2' style="font-size: 18px;"></i>
+        </a>
+        <span class="my-8 block text-xl sm:text-4xl font-semibold text-center items-center">Drag-and-Drop Planner</span>
+        <div class="w-24"></div>
+    </div>
+
+    <div class="container mx-auto mt-8">
+        <div class="max-w-lg mx-auto px-4">
+            <h1 class="text-2xl font-bold mb-4">To-Do List</h1>
+            <ul id="todoList" class="list-disc space-y-2">
+                <!-- List placeholder -->
+            </ul>
+            <input type="text" id="taskInput" class="w-full border rounded px-2 py-1 mt-4 text-black"
+                placeholder="Add a new task">
+            <button id="addTaskBtn" class="bg-blue-500 text-white px-4 py-2 mt-2">Add Task</button>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $("#addTaskBtn").on("click", function () {
+                const taskText = $("#taskInput").val();
+                if (taskText.trim() !== "") {
+                    const listItem = `<li class="flex justify-between items-center bg-gray-100 px-4 py-2 rounded text-black">
+                                <span class="drag-handle cursor-move">&#9776;</span>
+                                <span>${taskText}</span>
+                                <button class="text-red-500 delete-btn">Delete</button>
+                            </li>`;
+                    $("#todoList").append(listItem);
+                    $("#taskInput").val("");
+                }
+            });
+
+            $("#todoList").on("click", ".delete-btn", function () {
+                $(this).closest("li").remove();
+            });
+
+            $("#todoList").sortable({
+                handle: ".drag-handle",
+                update: function (event, ui) {
+                    // Arrange function
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

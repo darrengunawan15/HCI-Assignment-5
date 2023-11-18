@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Human Computer Interaction</title>
+    <link rel="shortcut icon" href="./assets/img/icon.png" type="image/x-icon">
+
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="/dist/output.css" rel="stylesheet">
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background-color: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            border-radius: 4em;
+            background-image: linear-gradient(transparent, aqua);
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+
+<body class="bg-gray-900 text-white overflow-x-hidden">
+
+    <div class="flex flex-row items-center justify-between">
+        <a href="index.html"
+            class="block h-auto w-auto ml-8 px-4 py-3 text-sm font-medium text-center text-white bg-blue-600 rounded-lg hover:bg-blue-700">
+            <i class='bx bx-home-alt-2' style="font-size: 18px;"></i>
+        </a>
+        <span class="my-8 block text-xl sm:text-4xl font-semibold text-center items-center">Endless Reading</span>
+        <div class="w-24"></div>
+    </div>
+
+    <div class="flex flex-col w-full justify-center items-center">
+        <div class="flex flex-col w-3/4">
+            <div id="content-container" class="flex flex-col w-full">
+                <div class="mb-4 p-6 bg-gray-800 border border-gray-700 rounded-md shadow-md">
+                    <h2 class="text-xl font-semibold mb-2">Ada's Algorithmic Vision</h2>
+                    <p>In 1843, Ada Lovelace, inspired by Charles Babbage's Analytical Engine, wrote the first-ever
+                        algorithm intended for a machine. Her visionary work laid the groundwork for future generations
+                        of programmers and earned her the title of the world's first computer programmer... <a href="#"
+                            class="text-blue-400">Read More</a></p>
+                </div>
+
+                <div class="mb-4 p-6 bg-gray-800 border border-gray-700 rounded-md shadow-md">
+                    <h2 class="text-xl font-semibold mb-2">Turing's Universal Machine</h2>
+                    <p>In 1936, Alan Turing conceptualized the Turing Machine, a theoretical device capable of
+                        performing any computation. This groundbreaking idea formed the basis of modern computer
+                        science, influencing everything from algorithms to artificial intelligence... <a href="#"
+                            class="text-blue-400">Read More</a></p>
+                </div>
+
+                <div class="mb-4 p-6 bg-gray-800 border border-gray-700 rounded-md shadow-md">
+                    <h2 class="text-xl font-semibold mb-2">ENIAC: Electronic Pioneers</h2>
+                    <p>In 1946, the Electronic Numerical Integrator and Computer (ENIAC) marked a new era as the world's
+                        first general-purpose electronic digital computer. Its inventors, J. Presper Eckert and John
+                        Mauchly, paved the way for electronic computing's widespread adoption... <a href="#"
+                            class="text-blue-400">Read More</a></p>
+                </div>
+
+                <div class="mb-4 p-6 bg-gray-800 border border-gray-700 rounded-md shadow-md">
+                    <h2 class="text-xl font-semibold mb-2">Grace Hopper and the First Compiler</h2>
+                    <p>In the 1950s, Rear Admiral Grace Hopper led the development of the UNIVAC I and pioneered the
+                        creation of the first compiler, a program that translates high-level programming languages into
+                        machine code. This innovation revolutionized software development... <a href="#"
+                            class="text-blue-400">Read More</a></p>
+                </div>
+                <div class="mb-4 p-6 bg-gray-800 border border-gray-700 rounded-md shadow-md">
+                    <h2 class="text-xl font-semibold mb-2">The Rise of High-Level Languages</h2>
+                    <p>In the 1950s and '60s, high-level programming languages like Fortran and LISP emerged, making it
+                        easier for programmers to write code. This shift marked a crucial step toward democratizing
+                        access to computing and fostering innovation... <a href="#" class="text-blue-400">Read More</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        $(document).ready(function () {
+            var isLoading = false;
+
+            function loadMoreContent() {
+                setTimeout(function () {
+                    var newContent = `
+                        <div class="mb-4 p-6 bg-gray-800 border border-gray-700 rounded-md shadow-md">
+                            <h2 class="text-xl font-semibold mb-2">Endless Article</h2>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. A sed provident recusandae. 
+                                Quos, itaque! Error assumenda nihil debitis delectus eum natus, ea quam maxime nesciunt 
+                                saepe minus harum necessitatibus tempora... <a href="#" class="text-blue-400">Read More</a></p>
+                        </div>
+                    `;
+                    $('#content-container').append(newContent);
+                    isLoading = false;
+                    $('#loading-indicator').addClass('hidden');
+                }, 1000);
+            }
+
+            $(window).on('scroll', function () {
+                if ($(window).scrollTop() + $(window).height() >= $(document).height() - 200 && !isLoading) {
+                    isLoading = true;
+                    loadMoreContent();
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
